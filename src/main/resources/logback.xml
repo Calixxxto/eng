@@ -1,0 +1,189 @@
+<configuration scan="true" scanPeriod="5 minutes">
+
+    <property resource="kap-account.properties"/>
+
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${catalina.home}/logs/kap-account.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>${catalina.home}/logs/kap-account.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+
+      <!-- keep 30 days' worth of history -->
+      <maxHistory>30</maxHistory>
+    </rollingPolicy>
+
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.home}/logs/kap-error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${catalina.home}/logs/kap-error.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <level>INFO</level>
+        <onMatch>ACCEPT</onMatch>
+        <onMismatch>DENY</onMismatch>
+    </filter>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <level>ERROR</level>
+        <onMatch>ACCEPT</onMatch>
+        <onMismatch>DENY</onMismatch>
+    </filter>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${catalina.home}/logs/kap-audit.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>${catalina.home}/logs/kap-audit.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <!-- keep 120 days' worth of history -->
+      <maxHistory>120</maxHistory>
+    </rollingPolicy>
+
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS}%n%msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="LOGIN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${catalina.home}/${log.path}/${log.logger.login.name}.${log.extension.base}</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>${catalina.home}/${log.path}/${log.logger.login.name}.%d{yyyy-MM-dd}.${log.extension.base}.${log.extension.archive}</fileNamePattern>
+      <!-- keep 120 days' worth of history -->
+      <maxHistory>120</maxHistory>
+    </rollingPolicy>
+
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS}%n%msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="CLIENT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${catalina.home}/logs/kap-client.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>${catalina.home}/logs/kap-client.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <!-- keep 120 days' worth of history -->
+      <maxHistory>120</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS}%n%msg%n</pattern>
+    </encoder>
+  </appender>
+
+
+  <appender name="BILLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${catalina.home}/logs/kap-billing.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>${catalina.home}/logs/kap-billing.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <!-- keep 120 days' worth of history -->
+      <maxHistory>120</maxHistory>
+    </rollingPolicy>
+
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+    <appender name="INTEGRATION" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.home}/logs/kap-integration.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${catalina.home}/logs/kap-integration.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+
+            <!-- keep 120 days' worth of history -->
+            <maxHistory>120</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+<!-- hibernate logs -->
+    <appender name="SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.home}/logs/kap-sql.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${catalina.home}/logs/kap-sql.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread]- %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.hibernate" level="INFO" additivity="false">
+        <appender-ref ref="SQL" />
+    </logger>
+    <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+        <appender-ref ref="SQL" />
+    </logger>
+    <logger name="org.hibernate.type" level="TRACE" additivity="false">
+        <appender-ref ref="SQL" />
+    </logger>
+
+
+
+  <!-- logger name="org.springframework" level="INFO"/ -->
+
+  <!-- additivity=false ensures audit data only goes to the audit log -->
+  <logger name="audit" level="INFO" additivity="false">
+        <appender-ref ref="AUDIT"/>
+  </logger>
+
+  <logger name="billing" level="INFO" additivity="false">
+        <appender-ref ref="BILLING"/>
+  </logger>
+
+  <logger name="integration" level="INFO" additivity="false">
+        <appender-ref ref="INTEGRATION"/>
+  </logger>
+   
+  <logger name="client" level="INFO" additivity="false">
+        <appender-ref ref="CLIENT"/>
+  </logger>
+
+  <logger name="login" level="INFO" additivity="false">
+        <appender-ref ref="LOGIN"/>
+  </logger>
+
+    <logger name="error" level="INFO">
+        <appender-ref ref="ERROR"/>
+    </logger>
+
+  <root level="INFO">
+    <appender-ref ref="FILE" />
+    <appender-ref ref="STDOUT" />
+  </root>
+
+</configuration>
