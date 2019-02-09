@@ -1,3 +1,11 @@
 .idea/
-target/
+
 *.iml
+
+/target
+.classpath
+.project
+
+/src/main/webapp/WEB-INF/resources/js/all.js
+buildNumber.properties
+/.settings/
