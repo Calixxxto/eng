@@ -1,0 +1,23 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="home">Главная</a></li>
+    <li><a ui-sref="users.list">Список пользователей</a></li>
+    <li class="active" ng-show="isNew">Создание нового пользователя</li>
+    <li class="active" ng-show="!isNew">Просмотр пользователя</li>
+</ol>
+
+<div class="alert alert-warning" ng-show="!user.enabled">Пользователь заблокирован</div>
+
+<div class="pull-right">
+    <button type="button" class="btn btn-primary btn-xs" ui-sref="users.update({id:user.id})"><i class="fa fa-pencil-square-o"></i> Редактировать</button>
+    <button type="button" class="btn btn-danger btn-xs" ng-click="deleteUser(user.id)"><i class="fa fa-times"></i> Удалить</button>
+</div>
+
+<div class="row col-sm-12">
+    <div class="col-sm-2">Ф.И.О.</div>
+    <div class="col-sm-10">{{ user.fullName }}</div>
+</div>
+<div>------------------------------------------------------------------------------------------</div>
+<div class="row col-sm-12">
+    <div class="col-sm-2">Логин</div>
+    <div class="col-sm-10">{{ user.login }}</div>
+</div>

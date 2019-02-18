@@ -1,0 +1,31 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="home">Главная</a></li>
+    <li class="active">Список пользователей</li>
+</ol>
+
+<div class="pull-right">
+    <button type="button" class="btn btn-primary btn-xs" ui-sref="users.create" ng-cloak ng-show="AuthService.isWriteAccessTo('users')">Создать пользователя</button>
+</div>
+
+<table ng-table="usersTable" class="table table-striped" show-filter="true">
+    <tr ng-repeat="user in $data" ng-class="{'text-muted': !user.enabled}">
+        <td data-title="'Логин'" header-class="text-left" sortable="'login'" width="250" filter="{'login':'text'}">
+            <span ng-hide="AuthService.isWriteAccessTo('users')">{{user.login}}</span>
+            <a ng-show="AuthService.isWriteAccessTo('users')" ui-sref="users.view({id:user.id})">{{user.login}}</a>
+        </td>
+        <td data-title="'E-Mail'" header-class="text-left" sortable="'email'">{{user.email}}</td>
+        <td data-title="'Роли'" header-class="text-left" filter="{'role':'select'}" filter-data="filterRoles($column)">
+            <span ng-repeat="role in user.roles">
+                {{ StaticDataService.getRoles()[role.roleName] }}{{$last ? '' : ', '}}
+            </span>
+        </td>
+        <!--<td width="10" class="nopadding" ng-show="AuthService.isAccessTo('auctionUser')">-->
+            <!--<button tooltip="Добавить основание" type="button" class="btn btn-primary btn-xs" ui-sref="users.update({id:user.id})"><i class="fa fa-plus"></i></button>-->
+        <!--</td>-->
+        <td width="100" class="text-right" ng-cloak ng-show="AuthService.isWriteAccessTo('users')">
+            <button type="button" class="btn btn-primary btn-xs" ui-sref="users.view({id:user.id})" ><i class="fa fa-file-text-o"></i></button>
+            <button type="button" class="btn btn-primary btn-xs" ui-sref="users.update({id:user.id})"><i class="fa fa-pencil-square-o"></i></button>
+            <button type="button" class="btn btn-danger btn-xs" ng-click="deleteUser(user.id)"><i class="fa fa-times"></i></button>
+        </td>
+    </tr>
+</table>
